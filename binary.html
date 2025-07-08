@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Book</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #phonebook-form {
+            margin-bottom: 20px;
+        }
+        input[type="text"], button {
+            padding: 10px;
+            margin: 5px;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+        .contacts {
+            margin-top: 20px;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Phone Book Using Binary Search Tree</h1>
+
+<div id="phonebook-form">
+    <input type="text" id="name" placeholder="Name" required>
+    <input type="text" id="phone" placeholder="Phone Number" required>
+    <button onclick="addContact()">Add Contact</button>
+    <button onclick="searchContact()">Search Contact</button>
+    <button onclick="deleteContact()">Delete Contact</button>
+    <button onclick="displayContacts()">Display Contacts</button>
+</div>
+
+<div class="result" id="result"></div>
+<div class="contacts" id="contacts"></div>
+
+<script>
+    // Node structure for Binary Search Tree
+    class Node {
+        constructor(name, phone) {
+            this.name = name;
+            this.phone = phone;
+            this.left = null;
+            this.right = null;
+        }
+    }
+
+    // BST PhoneBook class
+    class PhoneBook {
+        constructor() {
+            this.root = null;
+        }
+
+        // Insert new contact
+        insert(name, phone) {
+            const newNode = new Node(name, phone);
+            if (this.root === null) {
+                this.root = newNode;
+            } else {
+                this._insertNode(this.root, newNode);
+            }
+        }
+
+        _insertNode(current, newNode) {
+            if (newNode.name < current.name) {
+                if (current.left === null) {
+                    current.left = newNode;
+                } else {
+                    this._insertNode(current.left, newNode);
+                }
+            } else if (newNode.name > current.name) {
+                if (current.right === null) {
+                    current.right = newNode;
+                } else {
+                    this._insertNode(current.right, newNode);
+                }
+            }
+        }
+
+        // Search for a contact
+        search(name) {
+            return this._searchNode(this.root, name);
+        }
+
+        _searchNode(node, name) {
+            if (node === null) {
+                return null;
+            }
+            if (name === node.name) {
+                return node;
+            } else if (name < node.name) {
+                return this._searchNode(node.left, name);
+            } else {
+                return this._searchNode(node.right, name);
+            }
+        }
+
+        // Delete a contact
+        delete(name) {
+            this.root = this._deleteNode(this.root, name);
+        }
+
+        _deleteNode(node, name) {
+            if (node === null) {
+                return null;
+            }
+
+            if (name < node.name) {
+                node.left = this._deleteNode(node.left, name);
+                return node;
+            } else if (name > node.name) {
+                node.right = this._deleteNode(node.right, name);
+                return node;
+            } else {
+                if (node.left === null && node.right === null) {
+                    node = null;
+                    return node;
+                }
+
+                if (node.left === null) {
+                    node = node.right;
+                    return node;
+                } else if (node.right === null) {
+                    node = node.left;
+                    return node;
+                }
+
+                let minNode = this._minValueNode(node.right);
+                node.name = minNode.name;
+                node.phone = minNode.phone;
+                node.right = this._deleteNode(node.right, minNode.name);
+                return node;
+            }
+        }
+
+        _minValueNode(node) {
+            let current = node;
+            while (current.left !== null) {
+                current = current.left;
+            }
+            return current;
+        }
+
+        // Display contacts in in-order traversal
+        display() {
+            let result = [];
+            this._inOrderTraversal(this.root, result);
+            return result;
+        }
+
+        _inOrderTraversal(node, result) {
+            if (node !== null) {
+                this._inOrderTraversal(node.left, result);
+                result.push({ name: node.name, phone: node.phone });
+                this._inOrderTraversal(node.right, result);
+            }
+        }
+    }
+
+    // Instantiate PhoneBook
+    const phoneBook = new PhoneBook();
+
+    // Add contact function
+    function addContact() {
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+
+        if (!name || !phone) {
+            alert('Please enter both name and phone number!');
+            return;
+        }
+
+        phoneBook.insert(name, phone);
+        document.getElementById('result').innerText = `Contact ${name} added successfully!`;
+        clearFields();
+    }
+
+    // Search contact function
+    function searchContact() {
+        const name = document.getElementById('name').value;
+
+        if (!name) {
+            alert('Please enter the name to search!');
+            return;
+        }
+
+        const result = phoneBook.search(name);
+        if (result) {
+            document.getElementById('result').innerText = `Found: ${result.name}'s phone number is ${result.phone}`;
+        } else {
+            document.getElementById('result').innerText = `Contact ${name} not found!`;
+        }
+    }
+
+    // Delete contact function
+    function deleteContact() {
+        const name = document.getElementById('name').value;
+
+        if (!name) {
+            alert('Please enter the name to delete!');
+            return;
+        }
+
+        phoneBook.delete(name);
+        document.getElementById('result').innerText = `Contact ${name} deleted successfully!`;
+    }
+
+    // Display contacts function
+    function displayContacts() {
+        const contacts = phoneBook.display();
+        let displayText = "Contacts:\n";
+
+        contacts.forEach(contact => {
+            displayText += `${contact.name}: ${contact.phone}\n`;
+        });
+
+        document.getElementById('contacts').innerText = displayText;
+    }
+
+    // Clear input fields after adding
+    function clearFields() {
+        document.getElementById('name').value = '';
+        document.getElementById('phone').value = '';
+    }
+</script>
+
+</body>
+</html>

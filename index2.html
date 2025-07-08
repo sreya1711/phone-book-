@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phonebook</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Phonebook</h1>
+        <div class="content">
+            <!-- Form Container -->
+            <div class="form-container">
+                <div id="insert-contact" class="section">
+                    <h2 class="section-title">Insert Contact</h2>
+                    <form id="insert-form">
+                        <label for="insert-name">Name:</label>
+                        <input type="text" id="insert-name" required>
+                        <br>
+                        <label for="insert-phone">Phone Number:</label>
+                        <input type="text" id="insert-phone" required>
+                        <br>
+                        <button type="submit" class="btn">Insert</button>
+                    </form>
+                </div>
+
+                <div id="search-contact" class="section">
+                    <h2 class="section-title">Search Contact</h2>
+                    <form id="search-form">
+                        <label for="search-name">Name:</label>
+                        <input type="text" id="search-name" required>
+                        <br>
+                        <button type="submit" class="btn">Search</button>
+                    </form>
+                    <p id="search-result" class="result"></p>
+                </div>
+
+                <div id="delete-contact" class="section">
+                    <h2 class="section-title">Delete Contact</h2>
+                    <form id="delete-form">
+                        <label for="delete-name">Name:</label>
+                        <input type="text" id="delete-name" required>
+                        <br>
+                        <button type="submit" class="btn">Delete</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Contacts List Container -->
+            <div class="contact-container">
+                <div id="display-contacts" class="section">
+                    <h2 class="section-title">Contacts</h2>
+                    <ul id="contacts-list" class="contact-list"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
+
+

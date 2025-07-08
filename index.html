@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Phonebook login</title>
+<meta name="viewport" content="width=device-width, initial-scale=0.1">
+<style>
+body, html {
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  color: antiquewhite;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.bg-img {
+  background-image: url("image1.jpg");
+  min-height: 620px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.container {
+  position:relative;
+  top: 120px;
+  left: 400px;
+  margin: 20px;
+  max-width: 300px;
+  padding: 16px;
+  background: rgb(255, 255, 255);
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  box-shadow: 7px 7px 60px #000;
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: rgb(255, 252, 252);
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+.btn {
+  background-color: #eea300;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+  border-radius: 45px;
+}
+
+.btn:hover {
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+
+<div class="bg-img">
+  <form class="container" id="loginForm">
+    <h1>Login</h1>
+
+    <label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" name="email" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+    
+    <button type="button" class="btn" onclick="redirectToPage()">Login</button>
+  </form>
+</div>
+
+<script>
+function redirectToPage() {
+  window.location.href = 'in.html';
+}
+</script>
+
+</body>
+</html>

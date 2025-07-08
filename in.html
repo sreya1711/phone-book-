@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .bg-img {
+            background-image: url("image2.jpg");
+            min-height: 620px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+
+        .btn {
+            background-color: #ffffff;
+            color: rgb(32, 28, 28);
+            padding: 16px 20px;
+            border: none;
+            cursor: pointer;
+            width: 30%;
+            height: 10%;
+            opacity: 0.9;
+            border-radius: 45px;
+            position: absolute; /* Absolute positioning */
+            top: 50%; /* Center vertically */
+            left: 50%; /* Center horizontally */
+            transform: translate(-50%, -50%); /* Adjust for the element's size */
+            text-align: center; /* Center text inside the button */
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-img">
+        <button type="button" class="btn" onclick="redirectToPage()">CLICK TO ENTER OUR PHONE BOOK</button>
+    </div>
+    <script>
+        function redirectToPage() {
+            window.location.href = 'index2.html';
+        }
+    </script>
+     
+</body>
+</html>
