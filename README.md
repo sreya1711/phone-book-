@@ -9,7 +9,7 @@
 
 ### 🚀 Live Demo
 
-👉 [Try it Live on Vercel](https://phone-book-orpin.vercel.app/) 
+👉 [Try it](https://phone-book-orpin.vercel.app/) 
 
 ---
 
